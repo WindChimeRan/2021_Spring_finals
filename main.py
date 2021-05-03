@@ -10,10 +10,13 @@ from pymunk.vec2d import Vec2d
 
 
 class Bread(object):
-    def __init__(self, height, delta) -> None:
+    """
+    Bread class, includes its shape, mass.
+    """
+
+    def __init__(self, height: float, delta: float) -> None:
         x = 600
         delta = 0
-        # x, y = position
         y = height
         x -= delta
 
@@ -30,10 +33,13 @@ class Bread(object):
 
 
 class Surface(object):
-    def __init__(self, height) -> None:
+    """
+    A surface is where the bread falls from, it can be a table surface or a palm surface.
+    """
+
+    def __init__(self, height: float) -> None:
         x = 600
         y = height
-        # x, y = position
         fp = [(20, -20), (-120, 0), (20, 20)]
         mass = 100
         # moment = pymunk.moment_for_poly(mass, fp)
@@ -60,8 +66,7 @@ class Surface(object):
 
 class Environment(object):
     """
-    This class implements a simple scene in which there is a static platform (made up of a couple of lines)
-    that don't move. Balls appear occasionally and drop onto the platform. They bounce around.
+    This class implements the physics environment with palm, bread and the ground. 
     """
 
     def __init__(self, bread, surface, impulse, display=False) -> None:
@@ -100,10 +105,10 @@ class Environment(object):
     def run(self) -> bool:
         """
         The main loop of the game.
-        :return: None
         """
         self._space.add(self.bread.body, self.bread.shape)
         self._space.add(self.surface.body, self.surface.shape)
+        # if not table:
         self._space.add(self.surface.j, self.surface.s)
 
         self._space.step(0.1)
@@ -182,16 +187,18 @@ class Environment(object):
 
 
 def simulation():
-    # print('sim')
-    height = np.random.random(1000) * 130 + 50 # 50 - 180
-    # height = np.random.random(1000) * 200  # 50 - 180
+    times = 10000
+    # height = np.random.random(times) * 130 + 50 # 50 - 180
+    height = np.random.random(times) * 10 + 30  # 50 - 180
+
+    # height = np.random.random(times) * 200  # 50 - 180
 
     height = 890 - height * 4
 
     # Palm force: n(0, 10000)
-    impluse = np.random.normal(0, 1000, size=1000)
+    impluse = np.random.normal(15000, 20000, size=times)
     # relative position between the bread and the palm: u(-15, 0).
-    delta = -np.random.random(1000) * 60
+    delta = -np.random.random(times) * 120 + 60
 
     results = []
     for h, i, d in zip(height, impluse, delta):
