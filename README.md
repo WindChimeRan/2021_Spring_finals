@@ -1,5 +1,20 @@
 # Monte Carlo Simulation of the Buttered Toast Phenomenon
 
+"The buttered toast phenomenon is an observation that buttered toast tends to land butter-side down after it falls." -Wikipedia 
+
+## Hypothesis 
+
+- If the height is less than 40 cm, the bread always land butter-side down.
+- The palm may give the bread a impulsive force, together with other variables, to alter the results. 
+
+## Demo
+
+![image](demo.png)
+
+
+## Dependency
+pygame and pymunk. see requirements.txt.
+
 ## How to run
 
 Use pygame to show the animation
@@ -25,6 +40,4 @@ For example, using the varables above, the simulation will give an output:
     P(Butter-Side Down) = 7.9%
 
 You can try your own parameters in the function simulation.
-
-## Demo
 
